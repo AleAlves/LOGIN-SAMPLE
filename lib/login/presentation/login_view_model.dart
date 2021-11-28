@@ -4,25 +4,12 @@ import 'package:login/core/ui/view_state.dart';
 import 'package:login/login/domain/login_interactor.dart';
 import 'package:login/login/domain/model/status_model.dart';
 import 'package:login/login/domain/model/user_model.dart';
+import 'package:login/login/presentation/ui/login_flow.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_view_model.g.dart';
 
 class LoginViewModel = _LoginViewModel with _$LoginViewModel;
-
-enum LoginFlow {
-  initial,
-  login,
-  signin,
-  login2fa,
-  toogle2fa,
-  otpQr,
-  forgot,
-  mailRegistration,
-  reset,
-  resetCode,
-  status
-}
 
 abstract class _LoginViewModel with Store {
   _LoginViewModel();
@@ -43,7 +30,7 @@ abstract class _LoginViewModel with Store {
   String? otpQR;
 
   @observable
-  bool firstAccess = false;
+  bool loginAutomatically = true;
 
   final LoginInteractor _interactor = LoginInteractorImpl();
 
@@ -148,7 +135,9 @@ abstract class _LoginViewModel with Store {
     if (userModel != null) {
       flow = LoginFlow.login;
       user = userModel;
-      login(userModel.profile?.email ?? '', userModel.auth?.password ?? '');
+      if(loginAutomatically){
+        login(userModel.profile?.email ?? '', userModel.auth?.password ?? '');
+      }
     }
   }
 

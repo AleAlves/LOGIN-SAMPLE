@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:login/login/presentation/login_view_model.dart';
+import 'package:login/login/presentation/ui/login_flow.dart';
 
 part 'status_model.g.dart';
 

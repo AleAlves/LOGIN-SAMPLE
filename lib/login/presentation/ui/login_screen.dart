@@ -14,6 +14,7 @@ import 'package:login/login/presentation/widget/login_signin_widget.dart';
 import 'package:login/login/presentation/widget/login_status_widget.dart';
 
 import '../login_view_model.dart';
+import 'login_flow.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -41,22 +42,20 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         title: const Text('Login'),
       ),
-      body: WillPopScope(
-          child: Stack(
-            children: [
-              SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: CustomPaint(
-                  painter: CustomBackground(),
-                ),
-              ),
-              Observer(builder: (_) {
-                return navigation();
-              })
-            ],
+      body: Stack(
+        children: [
+          SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: CustomPaint(
+              painter: CustomBackground(),
+            ),
           ),
-          onWillPop: _onBackPressed),
+          Observer(builder: (_) {
+            return navigation();
+          })
+        ],
+      ),
     );
   }
 
@@ -96,9 +95,5 @@ class _LoginScreenState extends State<LoginScreen> {
       case ViewState.error:
         return CustomErrorWidget(viewModel.retry);
     }
-  }
-
-  Future<bool> _onBackPressed() async {
-    return false;
   }
 }

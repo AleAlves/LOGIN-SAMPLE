@@ -84,18 +84,19 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
     });
   }
 
-  final _$firstAccessAtom = Atom(name: '_LoginViewModel.firstAccess');
+  final _$loginAutomaticallyAtom =
+      Atom(name: '_LoginViewModel.loginAutomatically');
 
   @override
-  bool get firstAccess {
-    _$firstAccessAtom.reportRead();
-    return super.firstAccess;
+  bool get loginAutomatically {
+    _$loginAutomaticallyAtom.reportRead();
+    return super.loginAutomatically;
   }
 
   @override
-  set firstAccess(bool value) {
-    _$firstAccessAtom.reportWrite(value, super.firstAccess, () {
-      super.firstAccess = value;
+  set loginAutomatically(bool value) {
+    _$loginAutomaticallyAtom.reportWrite(value, super.loginAutomatically, () {
+      super.loginAutomatically = value;
     });
   }
 
@@ -114,7 +115,7 @@ flow: ${flow},
 user: ${user},
 status: ${status},
 otpQR: ${otpQR},
-firstAccess: ${firstAccess}
+loginAutomatically: ${loginAutomatically}
     ''';
   }
 }
